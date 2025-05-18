@@ -1,188 +1,155 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <title>主观压力即时评估表（PSS-10）</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>即时身心状态自检问卷</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f4f8;
-      margin: 0;
-      padding: 20px;
-    }
-    .container {
-      max-width: 720px;
+      font-family: sans-serif;
+      padding: 2rem;
+      max-width: 800px;
       margin: auto;
-      background: #ffffff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      line-height: 1.6;
+      background: #f9f9f9;
     }
     h1 {
-      font-size: 24px;
-      color: #333;
       text-align: center;
     }
     .question {
-      margin-bottom: 20px;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
-    }
-    select {
-      width: 100%;
-      padding: 8px;
-      font-size: 14px;
+    .result {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #e0f7fa;
+      border-left: 5px solid #00796b;
     }
     button {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      background-color: #007BFF;
-      color: white;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
       border: none;
+      background-color: #00796b;
+      color: white;
       border-radius: 5px;
       cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    #result {
-      margin-top: 30px;
-      font-size: 18px;
-      text-align: center;
-      color: #333;
+      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>主观压力即时评估表（PSS-10）</h1>
-    <form id="stressForm">
-      <div class="question">
-        <label>1. 过去一周，您是否觉得无法控制生活中的重要事情？</label>
-        <select name="q1">
-          <option value="0">从不</option>
-          <option value="1">很少</option>
-          <option value="2">有时</option>
-          <option value="3">经常</option>
-          <option value="4">总是</option>
-        </select>
-      </div>
-      <div class="question">
-        <label>2. 您是否感到难以处理生活中发生的重要事情？</label>
-        <select name="q2">
-          <option value="0">从不</option>
-          <option value="1">很少</option>
-          <option value="2">有时</option>
-          <option value="3">经常</option>
-          <option value="4">总是</option>
-        </select>
-      </div>
-      <div class="question">
-        <label>3. 您是否感到紧张或压力很大？</label>
-        <select name="q3">
-          <option value="0">从不</option>
-          <option value="1">很少</option>
-          <option value="2">有时</option>
-          <option value="3">经常</option>
-          <option value="4">总是</option>
-        </select>
-      </div>
-      <div class="question">
-        <label>4. 您是否感到自信应对生活中的问题？（反向计分）</label>
-        <select name="q4">
-          <option value="4">从不</option>
-          <option value="3">很少</option>
-          <option value="2">有时</option>
-          <option value="1">经常</option>
-          <option value="0">总是</option>
-        </select>
-      </div>
-      <div class="question">
-        <label>5. 您是否感到事情正如您期望的发展？（反向计分）</label>
-        <select name="q5">
-          <option value="4">从不</option>
-          <option value="3">很少</option>
-          <option value="2">有时</option>
-          <option value="1">经常</option>
-          <option value="0">总是</option>
-        </select>
-      </div>
-      <div class="question">
-        <label>6. 您是否发现自己无法应对生活中的所有事情？</label>
-        <select name="q6">
-          <option value="0">从不</option>
-          <option value="1">很少</option>
-          <option value="2">有时</option>
-          <option value="3">经常</option>
-          <option value="4">总是</option>
-        </select>
-      </div>
-      <div class="question">
-        <label>7. 您是否能够掌控烦人的事情？（反向计分）</label>
-        <select name="q7">
-          <option value="4">从不</option>
-          <option value="3">很少</option>
-          <option value="2">有时</option>
-          <option value="1">经常</option>
-          <option value="0">总是</option>
-        </select>
-      </div>
-      <div class="question">
-        <label>8. 您是否感到情绪烦躁或心烦意乱？</label>
-        <select name="q8">
-          <option value="0">从不</option>
-          <option value="1">很少</option>
-          <option value="2">有时</option>
-          <option value="3">经常</option>
-          <option value="4">总是</option>
-        </select>
-      </div>
-      <div class="question">
-        <label>9. 您是否能掌控个人问题？（反向计分）</label>
-        <select name="q9">
-          <option value="4">从不</option>
-          <option value="3">很少</option>
-          <option value="2">有时</option>
-          <option value="1">经常</option>
-          <option value="0">总是</option>
-        </select>
-      </div>
-      <div class="question">
-        <label>10. 您是否感到事情超出了您的控制？</label>
-        <select name="q10">
-          <option value="0">从不</option>
-          <option value="1">很少</option>
-          <option value="2">有时</option>
-          <option value="3">经常</option>
-          <option value="4">总是</option>
-        </select>
-      </div>
-      <button type="submit">提交评估</button>
-    </form>
-    <div id="result"></div>
-  </div>
+  <h1>即时身心状态自检问卷</h1>
+
+  <form id="stressForm">
+    <div class="question">1. 你现在是否感到<strong>头晕</strong>或轻微眩晕？<br>
+      <label><input type="radio" name="q1" value="0" required> 没有</label>
+      <label><input type="radio" name="q1" value="1"> 轻微</label>
+      <label><input type="radio" name="q1" value="2"> 明显</label>
+      <label><input type="radio" name="q1" value="3"> 非常明显</label>
+    </div>
+
+    <div class="question">2. 你是否觉得<strong>身体沉重或乏力</strong>，不想动？<br>
+      <label><input type="radio" name="q2" value="0" required> 没有</label>
+      <label><input type="radio" name="q2" value="1"> 轻微</label>
+      <label><input type="radio" name="q2" value="2"> 明显</label>
+      <label><input type="radio" name="q2" value="3"> 非常明显</label>
+    </div>
+
+    <div class="question">3. 你是否有<strong>肌肉紧绷</strong>、呼吸不畅或身体发紧？<br>
+      <label><input type="radio" name="q3" value="0" required> 没有</label>
+      <label><input type="radio" name="q3" value="1"> 轻微</label>
+      <label><input type="radio" name="q3" value="2"> 明显</label>
+      <label><input type="radio" name="q3" value="3"> 非常明显</label>
+    </div>
+
+    <div class="question">4. 你是否感到<strong>心烦、易怒、焦躁或情绪低落</strong>？<br>
+      <label><input type="radio" name="q4" value="0" required> 没有</label>
+      <label><input type="radio" name="q4" value="1"> 轻微</label>
+      <label><input type="radio" name="q4" value="2"> 明显</label>
+      <label><input type="radio" name="q4" value="3"> 非常明显</label>
+    </div>
+
+    <div class="question">5. 你是否有<strong>想逃避任务</strong>或“不想再干了”的想法？<br>
+      <label><input type="radio" name="q5" value="0" required> 没有</label>
+      <label><input type="radio" name="q5" value="1"> 轻微</label>
+      <label><input type="radio" name="q5" value="2"> 明显</label>
+      <label><input type="radio" name="q5" value="3"> 非常明显</label>
+    </div>
+
+    <div class="question">6. 你是否感到<strong>胸口压抑</strong>、情绪卡顿或难以放松？<br>
+      <label><input type="radio" name="q6" value="0" required> 没有</label>
+      <label><input type="radio" name="q6" value="1"> 轻微</label>
+      <label><input type="radio" name="q6" value="2"> 明显</label>
+      <label><input type="radio" name="q6" value="3"> 非常明显</label>
+    </div>
+
+    <div class="question">7. 你是否觉得<strong>注意力难集中</strong>，容易走神？<br>
+      <label><input type="radio" name="q7" value="0" required> 没有</label>
+      <label><input type="radio" name="q7" value="1"> 轻微</label>
+      <label><input type="radio" name="q7" value="2"> 明显</label>
+      <label><input type="radio" name="q7" value="3"> 非常明显</label>
+    </div>
+
+    <div class="question">8. 你是否思维变慢，或“脑袋空空”的感觉？<br>
+      <label><input type="radio" name="q8" value="0" required> 没有</label>
+      <label><input type="radio" name="q8" value="1"> 轻微</label>
+      <label><input type="radio" name="q8" value="2"> 明显</label>
+      <label><input type="radio" name="q8" value="3"> 非常明显</label>
+    </div>
+
+    <div class="question">9. 你是否出现<strong>拖延、犹豫</strong>，难以下决心？<br>
+      <label><input type="radio" name="q9" value="0" required> 没有</label>
+      <label><input type="radio" name="q9" value="1"> 轻微</label>
+      <label><input type="radio" name="q9" value="2"> 明显</label>
+      <label><input type="radio" name="q9" value="3"> 非常明显</label>
+    </div>
+
+    <div class="question">10. 你是否<strong>完全没动力</strong>，靠意志力强撑？<br>
+      <label><input type="radio" name="q10" value="0" required> 没有</label>
+      <label><input type="radio" name="q10" value="1"> 轻微</label>
+      <label><input type="radio" name="q10" value="2"> 明显</label>
+      <label><input type="radio" name="q10" value="3"> 非常明显</label>
+    </div>
+
+    <button type="submit">提交并查看建议</button>
+  </form>
+
+  <div id="result" class="result" style="display: none;"></div>
+
   <script>
-    document.getElementById("stressForm").addEventListener("submit", function(e) {
+    const form = document.getElementById('stressForm');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
+      const formData = new FormData(form);
       let total = 0;
-      for (let i = 1; i <= 10; i++) {
-        total += parseInt(document.querySelector(`select[name="q${i}"]`).value);
+      for (let [key, value] of formData.entries()) {
+        total += parseInt(value);
       }
-      let level = '';
-      if (total <= 13) {
-        level = '【低压力水平】您目前处于相对放松的状态。';
-      } else if (total <= 26) {
-        level = '【中等压力水平】建议关注自身状态，适当调整节奏。';
+
+      let message = `<h2>总分：${total} 分</h2>`;
+      if (total <= 6) {
+        message += "<p><strong>状态良好</strong>：可以继续保持当前节奏。</p>";
+      } else if (total <= 12) {
+        message += "<p><strong>轻度疲劳</strong>：建议站起来活动 5 分钟、深呼吸或喝水。</p>";
+      } else if (total <= 18) {
+        message += `<p><strong>中度疲劳</strong>：建议主动式休息 10–15 分钟：</p>
+        <ul><li>做拉伸或快走</li><li>听节奏轻快的放松音乐</li><li>闭眼或呼吸训练</li></ul>`;
+      } else if (total <= 24) {
+        message += `<p><strong>高度疲劳</strong>：建议立即中止任务，深度放松 30 分钟：</p>
+        <ul><li>听舒缓音乐</li><li>短时躺下</li><li>放下手机冥想</li></ul>`;
       } else {
-        level = '【高压力水平】建议您适时休息，或考虑寻求支持。';
+        message += `<p><strong>极度疲劳</strong>：必须立即停止一切任务，进入恢复性休息或睡眠。</p>`;
       }
-      document.getElementById("result").innerHTML = `<p>总分：<strong>${total}</strong></p><p>${level}</p>`;
+
+      resultDiv.innerHTML = message;
+      resultDiv.style.display = 'block';
+      resultDiv.scrollIntoView({ behavior: "smooth" });
     });
   </script>
 </body>
