@@ -1,156 +1,110 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!DOCTYPE html><html lang="zh">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>即时身心状态自检问卷</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>状态-任务匹配型冲锋系统</title>
   <style>
     body {
       font-family: sans-serif;
-      padding: 2rem;
-      max-width: 800px;
+      background: #f4f4f4;
+      padding: 20px;
+      max-width: 600px;
       margin: auto;
-      line-height: 1.6;
-      background: #f9f9f9;
     }
     h1 {
       text-align: center;
     }
     .question {
-      margin-bottom: 1rem;
-      padding: 1rem;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
     }
-    .result {
-      margin-top: 2rem;
-      padding: 1rem;
-      background: #e0f7fa;
-      border-left: 5px solid #00796b;
+    .result, .task-input, .start-section {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff;
+      border: 1px solid #ddd;
     }
     button {
-      padding: 0.6rem 1.2rem;
-      font-size: 1rem;
-      border: none;
-      background-color: #00796b;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 1rem;
+      padding: 8px 16px;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
-  <h1>即时身心状态自检问卷</h1>
+  <h1>冲锋前状态自检</h1>
+  <div class="question">
+    <p>1. 你现在头晕吗？</p>
+    <label><input type="radio" name="q1" value="yes" /> 是</label>
+    <label><input type="radio" name="q1" value="no" /> 否</label>
+  </div>
+  <div class="question">
+    <p>2. 你是否感到身体乏力？</p>
+    <label><input type="radio" name="q2" value="yes" /> 是</label>
+    <label><input type="radio" name="q2" value="no" /> 否</label>
+  </div>
+  <div class="question">
+    <p>3. 你现在是否想立刻完成一些事情？</p>
+    <label><input type="radio" name="q3" value="yes" /> 是</label>
+    <label><input type="radio" name="q3" value="no" /> 否</label>
+  </div>
+  <div class="question">
+    <p>4. 你现在心情如何？</p>
+    <label><input type="radio" name="q4" value="good" /> 好</label>
+    <label><input type="radio" name="q4" value="neutral" /> 一般</label>
+    <label><input type="radio" name="q4" value="bad" /> 烦躁/低落</label>
+  </div><button onclick="evaluateState()">生成建议</button>
 
-  <form id="stressForm">
-    <div class="question">1. 你现在是否感到<strong>头晕</strong>或轻微眩晕？<br>
-      <label><input type="radio" name="q1" value="0" required> 没有</label>
-      <label><input type="radio" name="q1" value="1"> 轻微</label>
-      <label><input type="radio" name="q1" value="2"> 明显</label>
-      <label><input type="radio" name="q1" value="3"> 非常明显</label>
+  <div class="result" id="suggestion"></div>  <div class="task-input" id="taskInput">
+    <p>你要做什么任务？</p>
+    <input type="text" id="taskContent" placeholder="例如：整理桌面、写日记..." style="width:100%; padding:8px;" />
+    <div class="start-section">
+      <button onclick="startTask()">开始冲锋</button>
     </div>
+  </div>  <script>
+    function evaluateState() {
+      const q1 = document.querySelector('input[name="q1"]:checked')?.value;
+      const q2 = document.querySelector('input[name="q2"]:checked')?.value;
+      const q3 = document.querySelector('input[name="q3"]:checked')?.value;
+      const q4 = document.querySelector('input[name="q4"]:checked')?.value;
 
-    <div class="question">2. 你是否觉得<strong>身体沉重或乏力</strong>，不想动？<br>
-      <label><input type="radio" name="q2" value="0" required> 没有</label>
-      <label><input type="radio" name="q2" value="1"> 轻微</label>
-      <label><input type="radio" name="q2" value="2"> 明显</label>
-      <label><input type="radio" name="q2" value="3"> 非常明显</label>
-    </div>
-
-    <div class="question">3. 你是否有<strong>肌肉紧绷</strong>、呼吸不畅或身体发紧？<br>
-      <label><input type="radio" name="q3" value="0" required> 没有</label>
-      <label><input type="radio" name="q3" value="1"> 轻微</label>
-      <label><input type="radio" name="q3" value="2"> 明显</label>
-      <label><input type="radio" name="q3" value="3"> 非常明显</label>
-    </div>
-
-    <div class="question">4. 你是否感到<strong>心烦、易怒、焦躁或情绪低落</strong>？<br>
-      <label><input type="radio" name="q4" value="0" required> 没有</label>
-      <label><input type="radio" name="q4" value="1"> 轻微</label>
-      <label><input type="radio" name="q4" value="2"> 明显</label>
-      <label><input type="radio" name="q4" value="3"> 非常明显</label>
-    </div>
-
-    <div class="question">5. 你是否有<strong>想逃避任务</strong>或“不想再干了”的想法？<br>
-      <label><input type="radio" name="q5" value="0" required> 没有</label>
-      <label><input type="radio" name="q5" value="1"> 轻微</label>
-      <label><input type="radio" name="q5" value="2"> 明显</label>
-      <label><input type="radio" name="q5" value="3"> 非常明显</label>
-    </div>
-
-    <div class="question">6. 你是否感到<strong>胸口压抑</strong>、情绪卡顿或难以放松？<br>
-      <label><input type="radio" name="q6" value="0" required> 没有</label>
-      <label><input type="radio" name="q6" value="1"> 轻微</label>
-      <label><input type="radio" name="q6" value="2"> 明显</label>
-      <label><input type="radio" name="q6" value="3"> 非常明显</label>
-    </div>
-
-    <div class="question">7. 你是否觉得<strong>注意力难集中</strong>，容易走神？<br>
-      <label><input type="radio" name="q7" value="0" required> 没有</label>
-      <label><input type="radio" name="q7" value="1"> 轻微</label>
-      <label><input type="radio" name="q7" value="2"> 明显</label>
-      <label><input type="radio" name="q7" value="3"> 非常明显</label>
-    </div>
-
-    <div class="question">8. 你是否思维变慢，或“脑袋空空”的感觉？<br>
-      <label><input type="radio" name="q8" value="0" required> 没有</label>
-      <label><input type="radio" name="q8" value="1"> 轻微</label>
-      <label><input type="radio" name="q8" value="2"> 明显</label>
-      <label><input type="radio" name="q8" value="3"> 非常明显</label>
-    </div>
-
-    <div class="question">9. 你是否出现<strong>拖延、犹豫</strong>，难以下决心？<br>
-      <label><input type="radio" name="q9" value="0" required> 没有</label>
-      <label><input type="radio" name="q9" value="1"> 轻微</label>
-      <label><input type="radio" name="q9" value="2"> 明显</label>
-      <label><input type="radio" name="q9" value="3"> 非常明显</label>
-    </div>
-
-    <div class="question">10. 你是否<strong>完全没动力</strong>，靠意志力强撑？<br>
-      <label><input type="radio" name="q10" value="0" required> 没有</label>
-      <label><input type="radio" name="q10" value="1"> 轻微</label>
-      <label><input type="radio" name="q10" value="2"> 明显</label>
-      <label><input type="radio" name="q10" value="3"> 非常明显</label>
-    </div>
-
-    <button type="submit">提交并查看建议</button>
-  </form>
-
-  <div id="result" class="result" style="display: none;"></div>
-
-  <script>
-    const form = document.getElementById('stressForm');
-    const resultDiv = document.getElementById('result');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(form);
-      let total = 0;
-      for (let [key, value] of formData.entries()) {
-        total += parseInt(value);
+      if (!q1 || !q2 || !q3 || !q4) {
+        alert("请完整回答所有问题。");
+        return;
       }
 
-      let message = `<h2>总分：${total} 分</h2>`;
-      if (total <= 6) {
-        message += "<p><strong>状态良好</strong>：可以继续保持当前节奏。</p>";
-      } else if (total <= 12) {
-        message += "<p><strong>轻度疲劳</strong>：建议站起来活动 5 分钟、深呼吸或喝水。</p>";
-      } else if (total <= 18) {
-        message += `<p><strong>中度疲劳</strong>：建议主动式休息 10–15 分钟：</p>
-        <ul><li>做拉伸或快走</li><li>听节奏轻快的放松音乐</li><li>闭眼或呼吸训练</li></ul>`;
-      } else if (total <= 24) {
-        message += `<p><strong>高度疲劳</strong>：建议立即中止任务，深度放松 30 分钟：</p>
-        <ul><li>听舒缓音乐</li><li>短时躺下</li><li>放下手机冥想</li></ul>`;
+      let suggestion = "";
+
+      if (q1 === "yes" || q2 === "yes") {
+        if (q3 === "no" || q4 === "bad") {
+          suggestion = "当前建议休息。可以先喝点水或闭目放松5分钟。";
+        } else {
+          suggestion = "建议尝试 轻冲锋（5分钟小任务），别给自己太大压力。";
+        }
+      } else if (q4 === "bad") {
+        suggestion = "情绪略低，建议做 轻任务 或进行短暂散步。";
+      } else if (q3 === "yes") {
+        if (q4 === "good") {
+          suggestion = "状态良好！适合 重冲锋（15~20分钟任务），全力以赴！";
+        } else {
+          suggestion = "你可以进行 中冲锋（10分钟任务），适度推进任务。";
+        }
       } else {
-        message += `<p><strong>极度疲劳</strong>：必须立即停止一切任务，进入恢复性休息或睡眠。</p>`;
+        suggestion = "情绪稳定但冲劲不强，可选 轻冲锋 或准备任务。";
       }
 
-      resultDiv.innerHTML = message;
-      resultDiv.style.display = 'block';
-      resultDiv.scrollIntoView({ behavior: "smooth" });
-    });
-  </script>
-</body>
+      document.getElementById("suggestion").innerText = suggestion;
+      document.getElementById("suggestion").style.display = "block";
+      document.getElementById("taskInput").style.display = "block";
+      document.querySelector(".start-section").style.display = "block";
+    }
+
+    function startTask() {
+      const task = document.getElementById("taskContent").value;
+      if (!task) {
+        alert("请输入你要执行的任务。");
+        return;
+      }
+      alert(`你已开始冲锋任务：${task}！全力以赴！`);
+    }
+  </script></body>
 </html>
